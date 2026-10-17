@@ -1,14 +1,7 @@
---[[
-    FERZZ STORE
-    Roblox Lua Source
-    GitHub-ready single-file source
-    Main file: SC_FERZZ_STORE_1TO1_SMALL.lua
-]]
-
 -- ============================================================
---  FERZZ STORE - FULLY MS V1 - UI MODERN KECIL + SLIDE 1-45
+--  FERZZ STORE - FULLY MS V1 - FERZZ STORE [ FS ] - RED UI + SLIDE 1-45
 -- ============================================================
---  CHANGES: UG_SPEED=20, Buy Max=45, FERZZ STORE UI + LOGO SLOT
+--  CHANGES: UG_SPEED=20, Buy Max=45, UI FERZZ STORE
 -- ============================================================
 
 -- ============================================================
@@ -1388,9 +1381,8 @@ Player.Idled:Connect(function()
 end)
 
 -- ============================================================
--- 🖥️ CREATE UI (FERZZ STORE - 1:1 REFERENCE LAYOUT)
+-- 🖥️ CREATE UI (FERZZ STORE STYLE)
 -- ============================================================
-
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "FERZZ_STORE_UI"
 ScreenGui.ResetOnSpawn = false
@@ -1398,338 +1390,336 @@ ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.IgnoreGuiInset = true
 ScreenGui.Parent = CoreGui
 
--- Compact scale: UI dibuat lebih kecil untuk layar HP
-local UIScale = Instance.new("UIScale")
-UIScale.Scale = 0.82
-UIScale.Parent = ScreenGui
-
-
--- Ukuran/proporsi mengikuti panel pada foto referensi
 local MainFrame = Instance.new("Frame")
-MainFrame.Name = "MainFrame"
-MainFrame.Size = UDim2.new(0, 310, 0, 212)
-MainFrame.Position = UDim2.new(0.5, -155, 0.5, -106)
-MainFrame.BackgroundColor3 = Color3.fromRGB(5, 10, 19)
+MainFrame.Size = UDim2.new(0, 400, 0, 200)
+MainFrame.Position = UDim2.new(0.5, -200, 0.5, -130)
+MainFrame.BackgroundColor3 = Color3.fromRGB(12, 12, 18)
 MainFrame.BorderSizePixel = 0
 MainFrame.Active = true
 MainFrame.ClipsDescendants = true
+Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 10)
+
+-- FERZZ STORE RED BORDER
+local RGBStroke = Instance.new("UIStroke")
+RGBStroke.Name = "FERZZRedStroke"
+RGBStroke.Thickness = 2
+RGBStroke.Transparency = 0
+RGBStroke.Color = Color3.fromRGB(255, 35, 45)
+RGBStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+RGBStroke.Parent = MainFrame
+
 MainFrame.Parent = ScreenGui
 
-local MainCorner = Instance.new("UICorner")
-MainCorner.CornerRadius = UDim.new(0, 11)
-MainCorner.Parent = MainFrame
+-- TOP BAR
+local TopBar = Instance.new("Frame")
+TopBar.Size = UDim2.new(1, 0, 0, 36)
+TopBar.BackgroundColor3 = Color3.fromRGB(18, 18, 26)
+TopBar.BorderSizePixel = 0
+TopBar.Parent = MainFrame
+Instance.new("UICorner", TopBar).CornerRadius = UDim.new(0, 10)
 
-local Border = Instance.new("UIStroke")
-Border.Thickness = 3
-Border.Color = Color3.fromRGB(255, 35, 35)
-Border.Transparency = 0
-Border.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Border.Parent = MainFrame
+local TopBarBottom = Instance.new("Frame")
+TopBarBottom.Size = UDim2.new(1, 0, 0, 6)
+TopBarBottom.Position = UDim2.new(0, 0, 1, -6)
+TopBarBottom.BackgroundColor3 = Color3.fromRGB(18, 18, 26)
+TopBarBottom.BorderSizePixel = 0
+TopBarBottom.Parent = TopBar
 
--- 🔴 RED UI THEME: no blue accent in FERZZ STORE panel
--- ============================================================
--- 🟥 FERZZ STORE LOGO
--- Upload logo kamu ke Roblox sebagai Image/Decal, lalu ganti
--- angka 0 di bawah dengan Asset ID logo tersebut.
--- Contoh: rbxassetid://1234567890
--- ============================================================
-local FERZZ_LOGO_ASSET_ID = "rbxassetid://0"
-
--- Header: judul berada di sebelah logo
 local TitleLabel = Instance.new("TextLabel")
-TitleLabel.Size = UDim2.new(1, -60, 0, 22)
-TitleLabel.Position = UDim2.new(0, 15, 0, 11)
+TitleLabel.Size = UDim2.new(1, -60, 1, 0)
+TitleLabel.Position = UDim2.new(0, 14, 0, 0)
 TitleLabel.BackgroundTransparency = 1
 TitleLabel.Text = "FERZZ STORE [ FS ]"
 TitleLabel.Font = Enum.Font.GothamBold
 TitleLabel.TextSize = 16
-TitleLabel.TextColor3 = Color3.fromRGB(255, 55, 55)
+TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
-TitleLabel.Parent = MainFrame
+TitleLabel.Parent = TopBar
 
-local SubtitleLabel = Instance.new("TextLabel")
-SubtitleLabel.Size = UDim2.new(1, -92, 0, 16)
-SubtitleLabel.Position = UDim2.new(0, 59, 0, 33)
-SubtitleLabel.BackgroundTransparency = 1
-SubtitleLabel.Text = "ferzz.store"
-SubtitleLabel.Font = Enum.Font.Gotham
-SubtitleLabel.TextSize = 10
-SubtitleLabel.TextColor3 = Color3.fromRGB(92, 103, 123)
-SubtitleLabel.TextXAlignment = Enum.TextXAlignment.Left
-SubtitleLabel.Parent = MainFrame
+local CloseBtn = Instance.new("TextButton")
+CloseBtn.Size = UDim2.new(0, 22, 0, 22)
+CloseBtn.Position = UDim2.new(1, -28, 0, 7)
+CloseBtn.BackgroundColor3 = Color3.fromRGB(42, 18, 22)
+CloseBtn.Text = "✕"
+CloseBtn.Font = Enum.Font.GothamBold
+CloseBtn.TextSize = 12
+CloseBtn.TextColor3 = Color3.fromRGB(255, 100, 100)
+CloseBtn.BorderSizePixel = 0
+CloseBtn.AutoButtonColor = false
+Instance.new("UICorner", CloseBtn).CornerRadius = UDim.new(0, 6)
+CloseBtn.Parent = TopBar
 
--- Icon kecil kanan atas seperti referensi
-local MiniButton = Instance.new("TextButton")
-MiniButton.Size = UDim2.new(0, 18, 0, 18)
-MiniButton.Position = UDim2.new(1, -30, 0, 18)
-MiniButton.BackgroundTransparency = 1
-MiniButton.Text = "□"
-MiniButton.Font = Enum.Font.Gotham
-MiniButton.TextSize = 10
-MiniButton.TextColor3 = Color3.fromRGB(145, 155, 175)
-MiniButton.AutoButtonColor = false
-MiniButton.Parent = MainFrame
+CloseBtn.MouseButton1Click:Connect(function() ScreenGui.Enabled = false end)
 
--- Garis header
-local Divider = Instance.new("Frame")
-Divider.Size = UDim2.new(1, -34, 0, 1)
-Divider.Position = UDim2.new(0, 17, 0, 58)
-Divider.BackgroundColor3 = Color3.fromRGB(40, 49, 65)
-Divider.BorderSizePixel = 0
-Divider.Parent = MainFrame
+-- CONTENT
+local Content = Instance.new("Frame")
+Content.Size = UDim2.new(1, 0, 1, -36)
+Content.Position = UDim2.new(0, 0, 0, 36)
+Content.BackgroundTransparency = 1
+Content.Parent = MainFrame
 
--- Farming row
-local FarmingLabel = Instance.new("TextLabel")
-FarmingLabel.Size = UDim2.new(1, -105, 0, 25)
-FarmingLabel.Position = UDim2.new(0, 17, 0, 69)
-FarmingLabel.BackgroundTransparency = 1
-FarmingLabel.Text = "Farming"
-FarmingLabel.Font = Enum.Font.Gotham
-FarmingLabel.TextSize = 13
-FarmingLabel.TextColor3 = Color3.fromRGB(215, 220, 232)
-FarmingLabel.TextXAlignment = Enum.TextXAlignment.Left
-FarmingLabel.Parent = MainFrame
+-- FARM SECTION
+local FarmSection = Instance.new("Frame")
+FarmSection.Size = UDim2.new(0.5, -18, 1, -24)
+FarmSection.Position = UDim2.new(0, 12, 0, 12)
+FarmSection.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
+FarmSection.BorderSizePixel = 0
+Instance.new("UICorner", FarmSection).CornerRadius = UDim.new(0, 8)
+FarmSection.Parent = Content
+
+local FarmTitle = Instance.new("TextLabel")
+FarmTitle.Size = UDim2.new(1, -16, 0, 22)
+FarmTitle.Position = UDim2.new(0, 8, 0, 8)
+FarmTitle.BackgroundTransparency = 1
+FarmTitle.Text = "⚡ FARM SETTINGS"
+FarmTitle.Font = Enum.Font.GothamBold
+FarmTitle.TextSize = 12
+FarmTitle.TextColor3 = Color3.fromRGB(255, 35, 45)
+FarmTitle.TextXAlignment = Enum.TextXAlignment.Left
+FarmTitle.Parent = FarmSection
+
+-- Toggle Autofarming
+local ToggleFrame = Instance.new("Frame")
+ToggleFrame.Size = UDim2.new(1, -16, 0, 30)
+ToggleFrame.Position = UDim2.new(0, 8, 0, 38)
+ToggleFrame.BackgroundTransparency = 1
+ToggleFrame.Parent = FarmSection
+
+local ToggleLabel = Instance.new("TextLabel")
+ToggleLabel.Size = UDim2.new(0.55, 0, 1, 0)
+ToggleLabel.Position = UDim2.new(0, 0, 0, 0)
+ToggleLabel.BackgroundTransparency = 1
+ToggleLabel.Text = "Autofarming"
+ToggleLabel.Font = Enum.Font.Gotham
+ToggleLabel.TextSize = 12
+ToggleLabel.TextColor3 = Color3.fromRGB(220, 220, 235)
+ToggleLabel.TextXAlignment = Enum.TextXAlignment.Left
+ToggleLabel.Parent = ToggleFrame
 
 local ToggleBtn = Instance.new("TextButton")
-ToggleBtn.Name = "FarmingToggle"
-ToggleBtn.Size = UDim2.new(0, 62, 0, 27)
-ToggleBtn.Position = UDim2.new(1, -80, 0, 69)
-ToggleBtn.BackgroundColor3 = Color3.fromRGB(32, 42, 60)
-ToggleBtn.BorderSizePixel = 0
+ToggleBtn.Size = UDim2.new(0, 50, 0, 24)
+ToggleBtn.Position = UDim2.new(1, -50, 0.5, -12)
+ToggleBtn.BackgroundColor3 = Color3.fromRGB(55, 22, 28)
 ToggleBtn.Text = "OFF"
 ToggleBtn.Font = Enum.Font.GothamBold
-ToggleBtn.TextSize = 10
-ToggleBtn.TextColor3 = Color3.fromRGB(205, 213, 227)
+ToggleBtn.TextSize = 11
+ToggleBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToggleBtn.BorderSizePixel = 0
 ToggleBtn.AutoButtonColor = false
-ToggleBtn.Parent = MainFrame
-
-local ToggleCorner = Instance.new("UICorner")
-ToggleCorner.CornerRadius = UDim.new(0, 6)
-ToggleCorner.Parent = ToggleBtn
+Instance.new("UICorner", ToggleBtn).CornerRadius = UDim.new(0, 5)
+ToggleBtn.Parent = ToggleFrame
 
 local toggleState = false
-
 ToggleBtn.MouseButton1Click:Connect(function()
     toggleState = not toggleState
-
+    ToggleBtn.Text = toggleState and "ON" or "OFF"
+    ToggleBtn.BackgroundColor3 = toggleState and Color3.fromRGB(0, 180, 80) or Color3.fromRGB(55, 22, 28)
     if toggleState then
-        ToggleBtn.Text = "ON"
-        ToggleBtn.BackgroundColor3 = Color3.fromRGB(220, 40, 40)
-        ToggleBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-
-        if _G.StartFullyFarm then
-            task.spawn(_G.StartFullyFarm)
-        end
+        if _G.StartFullyFarm then task.spawn(_G.StartFullyFarm) end
     else
-        ToggleBtn.Text = "OFF"
-        ToggleBtn.BackgroundColor3 = Color3.fromRGB(32, 42, 60)
-        ToggleBtn.TextColor3 = Color3.fromRGB(205, 213, 227)
-
-        if _G.StopFullyFarm then
-            _G.StopFullyFarm()
-        end
+        if _G.StopFullyFarm then _G.StopFullyFarm() end
     end
 end)
 
--- Amount + Cash: posisi seperti "8 | $1520" pada foto
-local AmountCashLabel = Instance.new("TextLabel")
-AmountCashLabel.Size = UDim2.new(1, -34, 0, 21)
-AmountCashLabel.Position = UDim2.new(0, 17, 0, 102)
-AmountCashLabel.BackgroundTransparency = 1
-AmountCashLabel.Text = tostring(FarmSettings.Amount) .. "   |   " .. FormatMoney(FarmState.CurrentCash or GetCurrentCash())
-AmountCashLabel.Font = Enum.Font.GothamBold
-AmountCashLabel.TextSize = 13
-AmountCashLabel.TextColor3 = Color3.fromRGB(215, 220, 232)
-AmountCashLabel.TextXAlignment = Enum.TextXAlignment.Left
-AmountCashLabel.Parent = MainFrame
+-- Slider Buy Amount (MAX 45)
+local SliderFrame = Instance.new("Frame")
+SliderFrame.Size = UDim2.new(1, -16, 0, 55)
+SliderFrame.Position = UDim2.new(0, 8, 0, 76)
+SliderFrame.BackgroundTransparency = 1
+SliderFrame.Parent = FarmSection
 
--- Slider persis satu garis
+local SliderLabel = Instance.new("TextLabel")
+SliderLabel.Size = UDim2.new(1, 0, 0, 16)
+SliderLabel.Position = UDim2.new(0, 0, 0, 0)
+SliderLabel.BackgroundTransparency = 1
+SliderLabel.Text = "Buy Amount: " .. FarmSettings.Amount
+SliderLabel.Font = Enum.Font.Gotham
+SliderLabel.TextSize = 11
+SliderLabel.TextColor3 = Color3.fromRGB(200, 200, 210)
+SliderLabel.TextXAlignment = Enum.TextXAlignment.Left
+SliderLabel.Parent = SliderFrame
+
 local SliderTrack = Instance.new("Frame")
-SliderTrack.Name = "AmountSlider"
-SliderTrack.Size = UDim2.new(1, -34, 0, 6)
-SliderTrack.Position = UDim2.new(0, 17, 0, 130)
-SliderTrack.BackgroundColor3 = Color3.fromRGB(29, 40, 60)
+SliderTrack.Size = UDim2.new(1, 0, 0, 6)
+SliderTrack.Position = UDim2.new(0, 0, 0, 22)
+SliderTrack.BackgroundColor3 = Color3.fromRGB(55, 22, 28)
 SliderTrack.BorderSizePixel = 0
-SliderTrack.Active = true
-SliderTrack.Parent = MainFrame
+Instance.new("UICorner", SliderTrack).CornerRadius = UDim.new(1, 0)
+SliderTrack.Parent = SliderFrame
 
-local SliderTrackCorner = Instance.new("UICorner")
-SliderTrackCorner.CornerRadius = UDim.new(1, 0)
-SliderTrackCorner.Parent = SliderTrack
-
-local initialPct = math.clamp((FarmSettings.Amount - BUY_MIN) / (BUY_MAX - BUY_MIN), 0, 1)
+-- ✅ Slider pct: (Amount-1)/(45-1) = (Amount-1)/44
+local initialPct = (FarmSettings.Amount - 1) / (BUY_MAX - 1)
 
 local SliderFill = Instance.new("Frame")
 SliderFill.Size = UDim2.new(initialPct, 0, 1, 0)
-SliderFill.BackgroundColor3 = Color3.fromRGB(235, 45, 45)
+SliderFill.BackgroundColor3 = Color3.fromRGB(255, 35, 45)
 SliderFill.BorderSizePixel = 0
+Instance.new("UICorner", SliderFill).CornerRadius = UDim.new(1, 0)
 SliderFill.Parent = SliderTrack
 
-local SliderFillCorner = Instance.new("UICorner")
-SliderFillCorner.CornerRadius = UDim.new(1, 0)
-SliderFillCorner.Parent = SliderFill
-
 local SliderKnob = Instance.new("Frame")
-SliderKnob.Size = UDim2.new(0, 17, 0, 17)
-SliderKnob.Position = UDim2.new(initialPct, -8.5, 0.5, -8.5)
-SliderKnob.BackgroundColor3 = Color3.fromRGB(230, 236, 246)
+SliderKnob.Size = UDim2.new(0, 14, 0, 14)
+SliderKnob.Position = UDim2.new(initialPct, -7, 0.5, -7)
+SliderKnob.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 SliderKnob.BorderSizePixel = 0
-SliderKnob.Active = true
+Instance.new("UICorner", SliderKnob).CornerRadius = UDim.new(1, 0)
 SliderKnob.Parent = SliderTrack
 
-local SliderKnobCorner = Instance.new("UICorner")
-SliderKnobCorner.CornerRadius = UDim.new(1, 0)
-SliderKnobCorner.Parent = SliderKnob
+-- TEXTBOX (Bisa ketik manual)
+local TextboxFrame = Instance.new("Frame")
+TextboxFrame.Size = UDim2.new(1, 0, 0, 24)
+TextboxFrame.Position = UDim2.new(0, 0, 0, 36)
+TextboxFrame.BackgroundColor3 = Color3.fromRGB(24, 14, 17)
+TextboxFrame.BorderSizePixel = 0
+Instance.new("UICorner", TextboxFrame).CornerRadius = UDim.new(0, 5)
+TextboxFrame.Parent = SliderFrame
 
+local Textbox = Instance.new("TextBox")
+Textbox.Size = UDim2.new(1, -16, 1, 0)
+Textbox.Position = UDim2.new(0, 8, 0, 0)
+Textbox.BackgroundTransparency = 1
+Textbox.Text = tostring(FarmSettings.Amount)
+Textbox.PlaceholderText = "Type amount (1-45)..."   -- ✅ Update placeholder
+Textbox.Font = Enum.Font.Gotham
+Textbox.TextSize = 11
+Textbox.TextColor3 = Color3.fromRGB(255, 255, 255)
+Textbox.PlaceholderColor3 = Color3.fromRGB(120, 120, 140)
+Textbox.TextXAlignment = Enum.TextXAlignment.Left
+Textbox.ClearTextOnFocus = false
+Textbox.Parent = TextboxFrame
+
+-- ✅ SLIDER LOGIC (MAX 45)
 local sliderDragging = false
 
 local function updateSlider(val)
-    val = math.clamp(math.floor(tonumber(val) or BUY_MIN), BUY_MIN, BUY_MAX)
+    val = math.clamp(math.floor(val), BUY_MIN, BUY_MAX)   -- ✅ 1-45
     FarmSettings.Amount = val
-
-    local pct = math.clamp((val - BUY_MIN) / (BUY_MAX - BUY_MIN), 0, 1)
+    local pct = (val - 1) / (BUY_MAX - 1)
     SliderFill.Size = UDim2.new(pct, 0, 1, 0)
-    SliderKnob.Position = UDim2.new(pct, -8.5, 0.5, -8.5)
-    AmountCashLabel.Text = tostring(val) .. "   |   " .. FormatMoney(FarmState.CurrentCash or GetCurrentCash())
-end
-
-local function sliderFromInput(input)
-    local relX = math.clamp(
-        (input.Position.X - SliderTrack.AbsolutePosition.X) / SliderTrack.AbsoluteSize.X,
-        0,
-        1
-    )
-    updateSlider(BUY_MIN + relX * (BUY_MAX - BUY_MIN))
+    SliderKnob.Position = UDim2.new(pct, -7, 0.5, -7)
+    SliderLabel.Text = "Buy Amount: " .. val
+    Textbox.Text = tostring(val)
 end
 
 SliderTrack.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1
-        or input.UserInputType == Enum.UserInputType.Touch then
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         sliderDragging = true
-        sliderFromInput(input)
-    end
-end)
-
-SliderKnob.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1
-        or input.UserInputType == Enum.UserInputType.Touch then
-        sliderDragging = true
-    end
-end)
-
-UserInputService.InputChanged:Connect(function(input)
-    if sliderDragging
-        and (input.UserInputType == Enum.UserInputType.MouseMovement
-        or input.UserInputType == Enum.UserInputType.Touch) then
-        sliderFromInput(input)
+        local relX = math.clamp((input.Position.X - SliderTrack.AbsolutePosition.X) / SliderTrack.AbsoluteSize.X, 0, 1)
+        updateSlider(1 + relX * (BUY_MAX - 1))   -- ✅ 1-45
     end
 end)
 
 UserInputService.InputEnded:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1
-        or input.UserInputType == Enum.UserInputType.Touch then
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         sliderDragging = false
     end
 end)
 
--- Status: "Idle" seperti foto
+UserInputService.InputChanged:Connect(function(input)
+    if sliderDragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+        local relX = math.clamp((input.Position.X - SliderTrack.AbsolutePosition.X) / SliderTrack.AbsoluteSize.X, 0, 1)
+        updateSlider(1 + relX * (BUY_MAX - 1))   -- ✅ 1-45
+    end
+end)
+
+Textbox.FocusLost:Connect(function()
+    local num = tonumber(Textbox.Text)
+    if num and num >= BUY_MIN and num <= BUY_MAX then   -- ✅ 1-45
+        updateSlider(num)
+    else
+        Textbox.Text = tostring(FarmSettings.Amount)
+    end
+end)
+
+-- STATS SECTION
+local StatsSection = Instance.new("Frame")
+StatsSection.Size = UDim2.new(0.5, -18, 1, -24)
+StatsSection.Position = UDim2.new(0.5, 6, 0, 12)
+StatsSection.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
+StatsSection.BorderSizePixel = 0
+Instance.new("UICorner", StatsSection).CornerRadius = UDim.new(0, 8)
+StatsSection.Parent = Content
+
+local StatsTitle = Instance.new("TextLabel")
+StatsTitle.Size = UDim2.new(1, -16, 0, 22)
+StatsTitle.Position = UDim2.new(0, 8, 0, 8)
+StatsTitle.BackgroundTransparency = 1
+StatsTitle.Text = "📊 STATISTICS"
+StatsTitle.Font = Enum.Font.GothamBold
+StatsTitle.TextSize = 12
+StatsTitle.TextColor3 = Color3.fromRGB(255, 35, 45)
+StatsTitle.TextXAlignment = Enum.TextXAlignment.Left
+StatsTitle.Parent = StatsSection
+
+local MarshLabel = Instance.new("TextLabel")
+MarshLabel.Size = UDim2.new(1, -16, 0, 20)
+MarshLabel.Position = UDim2.new(0, 8, 0, 40)
+MarshLabel.BackgroundTransparency = 1
+MarshLabel.Text = "🍬 Marshmallow Made: 0"
+MarshLabel.Font = Enum.Font.Gotham
+MarshLabel.TextSize = 12
+MarshLabel.TextColor3 = Color3.fromRGB(220, 220, 235)
+MarshLabel.TextXAlignment = Enum.TextXAlignment.Left
+MarshLabel.Parent = StatsSection
+
+local SoldLabel = Instance.new("TextLabel")
+SoldLabel.Size = UDim2.new(1, -16, 0, 20)
+SoldLabel.Position = UDim2.new(0, 8, 0, 62)
+SoldLabel.BackgroundTransparency = 1
+SoldLabel.Text = "💸 Sold: 0"
+SoldLabel.Font = Enum.Font.Gotham
+SoldLabel.TextSize = 12
+SoldLabel.TextColor3 = Color3.fromRGB(220, 220, 235)
+SoldLabel.TextXAlignment = Enum.TextXAlignment.Left
+SoldLabel.Parent = StatsSection
+
 local StatusLabel = Instance.new("TextLabel")
-StatusLabel.Size = UDim2.new(1, -34, 0, 18)
-StatusLabel.Position = UDim2.new(0, 17, 0, 146)
+StatusLabel.Size = UDim2.new(1, -16, 0, 20)
+StatusLabel.Position = UDim2.new(0, 8, 0, 84)
 StatusLabel.BackgroundTransparency = 1
-StatusLabel.Text = "Idle"
+StatusLabel.Text = "⚪ Status: Idle"
 StatusLabel.Font = Enum.Font.Gotham
-StatusLabel.TextSize = 10
-StatusLabel.TextColor3 = Color3.fromRGB(125, 136, 157)
+StatusLabel.TextSize = 11
+StatusLabel.TextColor3 = Color3.fromRGB(160, 160, 180)
 StatusLabel.TextXAlignment = Enum.TextXAlignment.Left
-StatusLabel.Parent = MainFrame
+StatusLabel.TextWrapped = true
+StatusLabel.Parent = StatsSection
 
-local StatsLabel = Instance.new("TextLabel")
-StatsLabel.Size = UDim2.new(1, -34, 0, 18)
-StatsLabel.Position = UDim2.new(0, 17, 0, 169)
-StatsLabel.BackgroundTransparency = 1
-StatsLabel.Text = "MS: [0]   time: [00:00]"
-StatsLabel.Font = Enum.Font.Code
-StatsLabel.TextSize = 10
-StatsLabel.TextColor3 = Color3.fromRGB(73, 87, 111)
-StatsLabel.TextXAlignment = Enum.TextXAlignment.Left
-StatsLabel.Parent = MainFrame
-
--- Update text sesuai status script
+-- UPDATE STATS LOOP
 task.spawn(function()
     while ScreenGui.Parent do
         pcall(function()
-            local cash = FarmState.CurrentCash
-            if not cash or cash <= 0 then
-                cash = GetCurrentCash()
-            end
-
-            AmountCashLabel.Text = tostring(FarmSettings.Amount) .. "   |   " .. FormatMoney(cash)
-
+            MarshLabel.Text = "🍬 Marshmallow Made: " .. (FarmState.MarshmallowsMade or 0)
+            SoldLabel.Text = "💸 Sold: " .. (FarmState.Sold or 0)
             if FarmRunning then
-                StatusLabel.Text = FarmState.Step or "Running"
-                StatusLabel.TextColor3 = Color3.fromRGB(150, 170, 195)
+                StatusLabel.Text = "🟢 Status: " .. (FarmState.Step or "Running")
             else
-                StatusLabel.Text = "Idle"
-                StatusLabel.TextColor3 = Color3.fromRGB(125, 136, 157)
+                StatusLabel.Text = "🔴 Status: Stopped"
             end
-
-            local ms = 0
-            pcall(function()
-                ms = math.floor(Player:GetNetworkPing() * 1000)
-            end)
-
-            local elapsed = math.max(0, os.time() - StartTime)
-            local minutes = math.floor(elapsed / 60)
-            local seconds = elapsed % 60
-
-            StatsLabel.Text = string.format(
-                "MS: [%d]   time: [%02d:%02d]",
-                ms,
-                minutes,
-                seconds
-            )
         end)
-
         task.wait(0.5)
     end
 end)
 
--- DRAG MOBILE/PC: hanya header area supaya slider tetap mudah disentuh
-local dragData = {
-    active = false,
-    startMouse = Vector2.new(),
-    startPos = UDim2.new()
-}
+-- DRAG
+local dragData = {active = false, startMouse = Vector2.new(), startPos = UDim2.new()}
 
-local function beginDrag(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1
-        or input.UserInputType == Enum.UserInputType.Touch then
-
+TopBar.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragData.active = true
         dragData.startMouse = input.Position
         dragData.startPos = MainFrame.Position
-
         input.Changed:Connect(function()
             if input.UserInputState == Enum.UserInputState.End then
                 dragData.active = false
             end
         end)
     end
-end
-
-TitleLabel.InputBegan:Connect(beginDrag)
-SubtitleLabel.InputBegan:Connect(beginDrag)
-MiniButton.InputBegan:Connect(beginDrag)
-LogoImage.InputBegan:Connect(beginDrag)
+end)
 
 UserInputService.InputChanged:Connect(function(input)
-    if dragData.active
-        and (input.UserInputType == Enum.UserInputType.MouseMovement
-        or input.UserInputType == Enum.UserInputType.Touch) then
-
+    if dragData.active and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
         local delta = input.Position - dragData.startMouse
-
         MainFrame.Position = UDim2.new(
             dragData.startPos.X.Scale,
             dragData.startPos.X.Offset + delta.X,
@@ -1739,7 +1729,7 @@ UserInputService.InputChanged:Connect(function(input)
     end
 end)
 
--- F3 toggle
+-- KEYBIND F3
 UserInputService.InputBegan:Connect(function(input)
     if input.KeyCode == Enum.KeyCode.F3 then
         ScreenGui.Enabled = not ScreenGui.Enabled
@@ -1749,10 +1739,8 @@ end)
 print("========================================")
 print("👑 FERZZ STORE UI LOADED")
 print("========================================")
-print("✅ Reference layout: 1:1 compact")
-print("✅ FERZZ STORE")
-print("✅ Farming ON/OFF")
-print("✅ Amount slider 1-45")
-print("✅ Mobile draggable")
+print("✅ UG_SPEED = 20")
+print("✅ Buy Max = 45")
+print("✅ UI FERZZ STORE (modern kecil)")
 print("📌 F3 = Toggle UI")
 print("========================================")
