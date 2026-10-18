@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FERZZ STORE — License Admin</title>
+<style>
+:root{--bg:#070707;--panel:#111;--panel2:#171717;--red:#e32636;--red2:#ff4545;--text:#f5f5f5;--muted:#aaa;--line:#422024}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#241012 0,#070707 52%);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+.wrap{max-width:760px;margin:auto;padding:18px 14px 40px}
+header{display:flex;align-items:center;gap:12px;margin:8px 0 18px}
+.logo{width:48px;height:48px;border:1px solid var(--red);border-radius:12px;display:grid;place-items:center;color:#fff;background:#1a080a;font-weight:900;box-shadow:0 0 18px #e3263626}
+h1{font-size:21px;margin:0;color:var(--red2);letter-spacing:.6px}
+.sub{font-size:12px;color:var(--muted);margin-top:3px}
+.notice{border:1px solid var(--line);background:#160c0d;border-radius:12px;padding:12px 13px;color:#e7c9cb;font-size:13px;line-height:1.45;margin-bottom:14px}
+.card{background:linear-gradient(145deg,#151515,#0e0e0e);border:1px solid #292929;border-radius:15px;padding:15px;margin:12px 0;box-shadow:0 8px 26px #0005}
+h2{font-size:16px;margin:0 0 13px}
+label{display:block;color:#ccc;font-size:12px;margin:11px 0 6px}
+input,select,button{font:inherit}
+input,select{width:100%;border:1px solid #393939;background:#090909;color:#fff;border-radius:9px;padding:12px;outline:none}
+input:focus,select:focus{border-color:var(--red)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button{border:0;border-radius:9px;padding:12px 14px;cursor:pointer;font-weight:750}
+.primary{background:var(--red);color:#fff;width:100%;margin-top:14px}
+.secondary{background:#242424;border:1px solid #444;color:#fff}
+.danger{background:#2b1012;border:1px solid #6c222a;color:#ffb9bf}
+button:active{transform:scale(.99)}
+.small{font-size:12px;color:var(--muted);line-height:1.45}
+.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:#0a0a0a;border:1px solid #282828;border-radius:10px;padding:12px}
+.stat b{display:block;font-size:21px;color:var(--red2)}
+.stat span{font-size:11px;color:var(--muted)}
+.keyresult{display:none;background:#080808;border:1px dashed var(--red);border-radius:10px;padding:12px;margin-top:12px;overflow-wrap:anywhere}
+.keyresult code{font-size:14px;color:#ff858c}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.toolbar input{flex:1;min-width:130px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:500px;font-size:12px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #292929;vertical-align:top}
+th{color:#bbb;font-weight:600}
+td code{overflow-wrap:anywhere;color:#ff858c}
+.status{display:inline-block;padding:4px 7px;border-radius:20px;background:#202020;color:#ddd;font-size:11px}
+.status.active{background:#102819;color:#9df0b8}
+.status.expired{background:#2a2020;color:#ffb3b3}
+.status.revoked{background:#301013;color:#ff929a}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.actions button{font-size:11px;padding:7px 9px}
+footer{text-align:center;color:#777;font-size:11px;margin-top:18px}
+@media(max-width:420px){.row{grid-template-columns:1fr}.wrap{padding:13px 10px 30px}.card{padding:13px}.stat b{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo">FS</div>
+  <div><h1>FERZZ STORE</h1><div class="sub">LICENSE ADMIN PANEL · LOCAL DEMO</div></div>
+</header>
+<div class="notice"><b>Demo lokal:</b> data disimpan hanya di browser/perangkat ini. Ini bukan server online, jadi key belum dapat diverifikasi oleh loader atau dibagikan otomatis ke perangkat pembeli. Jangan gunakan key sungguhan untuk data sensitif.</div>
+<section class="card">
+  <h2>Ringkasan Lisensi</h2>
+  <div class="statgrid">
+    <div class="stat"><b id="total">0</b><span>Total key</span></div>
+    <div class="stat"><b id="active">0</b><span>Aktif</span></div>
+    <div class="stat"><b id="revoked">0</b><span>Dicabut</span></div>
+  </div>
+</section>
+<section class="card">
+  <h2>Generate Key</h2>
+  <label for="plan">Pilih masa lisensi</label>
+  <select id="plan"><option value="day">1 Day — 24 jam</option><option value="month">1 Month — 30 hari</option><option value="permanent">Permanent — tanpa kedaluwarsa</option></select>
+  <div class="row">
+    <div><label for="buyer">Nama pembeli (opsional)</label><input id="buyer" placeholder="Contoh: pembeli_01" maxlength="60"></div>
+    <div><label for="count">Jumlah key</label><select id="count"><option>1</option><option>2</option><option>5</option><option>10</option></select></div>
+  </div>
+  <button class="primary" id="generate">＋ Generate Key</button>
+  <div class="keyresult" id="result"><div class="small">Key baru:</div><code id="newkey"></code><div class="toolbar" style="margin-top:10px"><button class="secondary" id="copynew">Salin key</button></div></div>
+  <p class="small">Waktu lisensi dimulai saat key dibuat pada demo ini. Permanent tidak memiliki tanggal kedaluwarsa.</p>
+</section>
+<section class="card">
+  <h2>Daftar Key</h2>
+  <div class="toolbar"><input id="search" placeholder="Cari key atau nama pembeli…"><button class="secondary" id="export">Ekspor JSON</button></div>
+  <div class="tablewrap"><table><thead><tr><th>Key / Pembeli</th><th>Paket</th><th>Status</th><th>Kedaluwarsa</th><th>Aksi</th></tr></thead><tbody id="rows"></tbody></table></div>
+  <p class="small" id="empty">Belum ada key. Generate key untuk mulai.</p>
+</section>
+<section class="card">
+  <h2>Backup lokal</h2>
+  <div class="toolbar"><button class="secondary" id="backup">Unduh backup JSON</button><button class="danger" id="clear">Hapus semua data lokal</button></div>
+  <p class="small">Simpan backup dengan aman. Menghapus data browser atau berpindah perangkat bisa menghilangkan daftar key lokal.</p>
+</section>
+<footer>FERZZ STORE · Admin UI demo · Tidak terhubung ke layanan online</footer>
+</div>
+<script>
+const STORE='ferzz_store_license_demo_v1';
+let licenses=[];
+try{licenses=JSON.parse(localStorage.getItem(STORE)||'[]');if(!Array.isArray(licenses))licenses=[]}catch(e){licenses=[]}
+const $=id=>document.getElementById(id);
+const plans={day:{label:'1 Day',ms:86400000},month:{label:'1 Month',ms:30*86400000},permanent:{label:'Permanent',ms:null}};
+function save(){try{localStorage.setItem(STORE,JSON.stringify(licenses))}catch(e){alert('Penyimpanan browser gagal. Ekspor backup dan coba browser lain.')}render()}
+function status(x){if(x.revoked)return 'revoked';if(x.expiresAt!==null&&Date.now()>=x.expiresAt)return 'expired';return 'active'}
+function fmt(t){return t===null?'Tidak kedaluwarsa':new Date(t).toLocaleString('id-ID',{dateStyle:'medium',timeStyle:'short'})}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function makeKey(){const a=new Uint8Array(12);crypto.getRandomValues(a);return 'FS-'+Array.from(a,b=>b.toString(16).padStart(2,'0')).join('').toUpperCase().match(/.{1,6}/g).join('-')}
+function render(){
+ $('total').textContent=licenses.length;
+ $('active').textContent=licenses.filter(x=>status(x)==='active').length;
+ $('revoked').textContent=licenses.filter(x=>x.revoked).length;
+ const q=$('search').value.toLowerCase().trim();
+ const filtered=licenses.filter(x=>x.key.toLowerCase().includes(q)||(x.buyer||'').toLowerCase().includes(q));
+ $('rows').innerHTML=filtered.map(x=>{
+ const st=status(x),label=st==='active'?'Aktif':st==='expired'?'Kedaluwarsa':'Dicabut';
+ return `<tr><td><code>${escapeHtml(x.key)}</code><br><span class="small">${escapeHtml(x.buyer||'Tanpa nama')}</span></td><td>${escapeHtml(x.planLabel)}</td><td><span class="status ${st}">${label}</span></td><td>${fmt(x.expiresAt)}</td><td><div class="actions"><button class="secondary" data-copy="${escapeHtml(x.key)}">Salin</button>${x.revoked?'':`<button class="danger" data-revoke="${escapeHtml(x.id)}">Cabut</button>`}</div></td></tr>`
+ }).join('');
+ $('empty').style.display=filtered.length?'none':'block';
+ document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>copyText(b.dataset.copy));
+ document.querySelectorAll('[data-revoke]').forEach(b=>b.onclick=()=>{const x=licenses.find(y=>y.id===b.dataset.revoke);if(x&&confirm('Cabut key ini?')){x.revoked=true;save()}});
+}
+async function copyText(s){try{await navigator.clipboard.writeText(s);alert('Berhasil disalin.')}catch(e){prompt('Salin teks ini:',s)}}
+$('generate').onclick=()=>{
+ const plan=plans[$('plan').value],now=Date.now(),count=Number($('count').value),buyer=$('buyer').value.trim();
+ const created=[];
+ for(let i=0;i<count;i++){const x={id:crypto.randomUUID?crypto.randomUUID():String(now)+'-'+i,key:makeKey(),plan: $('plan').value,planLabel:plan.label,buyer,createdAt:now,expiresAt:plan.ms===null?null:now+plan.ms,revoked:false};licenses.unshift(x);created.push(x.key)}
+ save();$('result').style.display='block';$('newkey').textContent=created.join('\n');$('copynew').onclick=()=>copyText(created.join('\n'));
+};
+$('search').addEventListener('input',render);
+function download(){const blob=new Blob([JSON.stringify({product:'FERZZ STORE',exportedAt:new Date().toISOString(),licenses},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='ferzz-store-license-backup.json';a.click();URL.revokeObjectURL(url)}
+$('export').onclick=download;$('backup').onclick=download;
+$('clear').onclick=()=>{if(confirm('Yakin hapus semua key dari browser ini? Tindakan ini tidak bisa dibatalkan.')){licenses=[];save();$('result').style.display='none'}};
+render();
+</script>
+</body>
+</html>
