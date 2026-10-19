@@ -1381,7 +1381,7 @@ Player.Idled:Connect(function()
 end)
 
 -- ============================================================
--- 🖥️ CREATE UI (FERZZ STORE X SKIPPY STORE - RED LEFT / PURPLE RIGHT)
+-- 🖥️ CREATE UI (FERZZ STORE X SKIPPY STORE - DARK RED THEME)
 -- ============================================================
 
 local ScreenGui = Instance.new("ScreenGui")
@@ -1402,21 +1402,14 @@ local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
 MainFrame.Size = UDim2.new(0, 310, 0, 212)
 MainFrame.Position = UDim2.new(0.5, -155, 0.5, -106)
-MainFrame.BackgroundColor3 = Color3.fromRGB(35, 5, 15)
+MainFrame.BackgroundColor3 = Color3.fromRGB(12, 10, 16)
 MainFrame.BorderSizePixel = 0
 MainFrame.Active = true
 MainFrame.ClipsDescendants = true
 MainFrame.Parent = ScreenGui
 
--- FERZZ STORE X SKIPPY STORE: merah di kiri, ungu di kanan
-local PanelGradient = Instance.new("UIGradient")
-PanelGradient.Color = ColorSequence.new({
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(90, 8, 24)),
-    ColorSequenceKeypoint.new(0.48, Color3.fromRGB(35, 8, 30)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(65, 18, 110))
-})
-PanelGradient.Rotation = 0
-PanelGradient.Parent = MainFrame
+-- Isi panel tetap gelap; warna hanya pada pinggiran.
+MainFrame.BackgroundColor3 = Color3.fromRGB(12, 10, 16)
 
 local MainCorner = Instance.new("UICorner")
 MainCorner.CornerRadius = UDim.new(0, 11)
@@ -1424,10 +1417,20 @@ MainCorner.Parent = MainFrame
 
 local Border = Instance.new("UIStroke")
 Border.Thickness = 2
-Border.Color = Color3.fromRGB(220, 45, 90)
+Border.Color = Color3.fromRGB(255, 35, 65)
 Border.Transparency = 0
 Border.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 Border.Parent = MainFrame
+
+-- Gradien pada PINGGIRAN saja: merah di kiri, ungu di kanan.
+local BorderGradient = Instance.new("UIGradient")
+BorderGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 35, 65)),
+    ColorSequenceKeypoint.new(0.48, Color3.fromRGB(165, 35, 115)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(145, 55, 255))
+})
+BorderGradient.Rotation = 0
+BorderGradient.Parent = Border
 
 -- Header: tanpa bar terpisah, sama seperti foto
 local TitleLabel = Instance.new("TextLabel")
@@ -1437,7 +1440,7 @@ TitleLabel.BackgroundTransparency = 1
 TitleLabel.Text = "FERZZ STORE X SKIPPY STORE"
 TitleLabel.Font = Enum.Font.GothamBold
 TitleLabel.TextSize = 16
-TitleLabel.TextColor3 = Color3.fromRGB(255, 70, 95)
+TitleLabel.TextColor3 = Color3.fromRGB(255, 95, 120)
 TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
 TitleLabel.Parent = MainFrame
 
@@ -1468,7 +1471,7 @@ MiniButton.Parent = MainFrame
 local Divider = Instance.new("Frame")
 Divider.Size = UDim2.new(1, -34, 0, 1)
 Divider.Position = UDim2.new(0, 17, 0, 64)
-Divider.BackgroundColor3 = Color3.fromRGB(100, 30, 75)
+Divider.BackgroundColor3 = Color3.fromRGB(105, 35, 105)
 Divider.BorderSizePixel = 0
 Divider.Parent = MainFrame
 
@@ -1488,7 +1491,7 @@ local ToggleBtn = Instance.new("TextButton")
 ToggleBtn.Name = "FarmingToggle"
 ToggleBtn.Size = UDim2.new(0, 62, 0, 27)
 ToggleBtn.Position = UDim2.new(1, -80, 0, 76)
-ToggleBtn.BackgroundColor3 = Color3.fromRGB(70, 20, 45)
+ToggleBtn.BackgroundColor3 = Color3.fromRGB(45, 12, 48)
 ToggleBtn.BorderSizePixel = 0
 ToggleBtn.Text = "OFF"
 ToggleBtn.Font = Enum.Font.GothamBold
@@ -1508,7 +1511,7 @@ ToggleBtn.MouseButton1Click:Connect(function()
 
     if toggleState then
         ToggleBtn.Text = "ON"
-        ToggleBtn.BackgroundColor3 = Color3.fromRGB(170, 45, 115)
+        ToggleBtn.BackgroundColor3 = Color3.fromRGB(145, 35, 115)
         ToggleBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 
         if _G.StartFullyFarm then
@@ -1516,7 +1519,7 @@ ToggleBtn.MouseButton1Click:Connect(function()
         end
     else
         ToggleBtn.Text = "OFF"
-        ToggleBtn.BackgroundColor3 = Color3.fromRGB(70, 20, 45)
+        ToggleBtn.BackgroundColor3 = Color3.fromRGB(45, 12, 48)
         ToggleBtn.TextColor3 = Color3.fromRGB(205, 213, 227)
 
         if _G.StopFullyFarm then
@@ -1542,7 +1545,7 @@ local SliderTrack = Instance.new("Frame")
 SliderTrack.Name = "AmountSlider"
 SliderTrack.Size = UDim2.new(1, -34, 0, 6)
 SliderTrack.Position = UDim2.new(0, 17, 0, 137)
-SliderTrack.BackgroundColor3 = Color3.fromRGB(55, 20, 55)
+SliderTrack.BackgroundColor3 = Color3.fromRGB(35, 9, 38)
 SliderTrack.BorderSizePixel = 0
 SliderTrack.Active = true
 SliderTrack.Parent = MainFrame
@@ -1555,7 +1558,7 @@ local initialPct = math.clamp((FarmSettings.Amount - BUY_MIN) / (BUY_MAX - BUY_M
 
 local SliderFill = Instance.new("Frame")
 SliderFill.Size = UDim2.new(initialPct, 0, 1, 0)
-SliderFill.BackgroundColor3 = Color3.fromRGB(190, 45, 100)
+SliderFill.BackgroundColor3 = Color3.fromRGB(170, 35, 115)
 SliderFill.BorderSizePixel = 0
 SliderFill.Parent = SliderTrack
 
@@ -1645,7 +1648,7 @@ StatsLabel.BackgroundTransparency = 1
 StatsLabel.Text = "MS: [0]   time: [00:00]"
 StatsLabel.Font = Enum.Font.Code
 StatsLabel.TextSize = 10
-StatsLabel.TextColor3 = Color3.fromRGB(130, 70, 145)
+StatsLabel.TextColor3 = Color3.fromRGB(210, 105, 210)
 StatsLabel.TextXAlignment = Enum.TextXAlignment.Left
 StatsLabel.Parent = MainFrame
 
