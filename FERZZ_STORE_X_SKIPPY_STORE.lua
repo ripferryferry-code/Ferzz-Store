@@ -1,7 +1,7 @@
 -- ============================================================
---  FERZZ STORE - FULLY MS V1 - UI MODERN KECIL + SLIDE 1-45
+--  FERZZ STORE X SKIPPY STORE - UI MODERN KECIL + SLIDE 1-45
 -- ============================================================
---  CHANGES: UG_SPEED=20, Buy Max=45, UI Zal Store
+--  CHANGES: UG_SPEED=20, Buy Max=45, FERZZ STORE X SKIPPY STORE
 -- ============================================================
 
 -- ============================================================
@@ -417,7 +417,7 @@ end
 -- ============================================================
 -- 🎨 RGB NAME (FERZZ STORE) - AUTO ON
 -- ============================================================
-local RGBEnabled = true
+local RGBEnabled = false
 local CurrentDisplayName = "FERZZ STORE X SKIPPY STORE"
 local RGBLoop = nil
 
@@ -847,7 +847,7 @@ local function BuyAll(amount)
         if w == prevW then
             stuckW = stuckW + 1
             if stuckW >= 5 then
-                warn("[nugi] ❌ Water stuck di " .. w .. " (target " .. amount .. ")")
+                warn("[FERZZ X SKIPPY] ❌ Water stuck di " .. w .. " (target " .. amount .. ")")
                 break
             end
             task.wait(0.3)
@@ -866,7 +866,7 @@ local function BuyAll(amount)
         if s == prevS then
             stuckS = stuckS + 1
             if stuckS >= 5 then
-                warn("[nugi] ❌ Sugar stuck di " .. s .. " (target " .. amount .. ")")
+                warn("[FERZZ X SKIPPY] ❌ Sugar stuck di " .. s .. " (target " .. amount .. ")")
                 break
             end
             task.wait(0.3)
@@ -885,7 +885,7 @@ local function BuyAll(amount)
         if g == prevG then
             stuckG = stuckG + 1
             if stuckG >= 5 then
-                warn("[nugi] ❌ Gelatin stuck di " .. g .. " (target " .. amount .. ")")
+                warn("[FERZZ X SKIPPY] ❌ Gelatin stuck di " .. g .. " (target " .. amount .. ")")
                 break
             end
             task.wait(0.3)
@@ -896,13 +896,13 @@ local function BuyAll(amount)
 
     task.wait(0.5)
     local fw, fs, fg = GetIngredientCount()
-    print("[nugi] 📦 Final inventory — W=" .. fw .. " S=" .. fs .. " G=" .. fg .. " (target " .. amount .. ")")
+    print("[FERZZ X SKIPPY] 📦 Final inventory — W=" .. fw .. " S=" .. fs .. " G=" .. fg .. " (target " .. amount .. ")")
 
     if fw >= amount and fs >= amount and fg >= amount then
         FarmState.TotalExpense = FarmState.TotalExpense + (amount * FarmSettings.IngredientCost)
         return true
     end
-    warn("[nugi] ❌ Buy FAILED — W=" .. fw .. " S=" .. fs .. " G=" .. fg .. " (target " .. amount .. ")")
+    warn("[FERZZ X SKIPPY] ❌ Buy FAILED — W=" .. fw .. " S=" .. fs .. " G=" .. fg .. " (target " .. amount .. ")")
     return false
 end
 
@@ -1381,7 +1381,7 @@ Player.Idled:Connect(function()
 end)
 
 -- ============================================================
--- 🖥️ CREATE UI (FERZZ STORE - 1:1 REFERENCE LAYOUT)
+-- 🖥️ CREATE UI (FERZZ STORE X SKIPPY STORE - RED LEFT / PURPLE RIGHT)
 -- ============================================================
 
 local ScreenGui = Instance.new("ScreenGui")
@@ -1740,10 +1740,10 @@ UserInputService.InputBegan:Connect(function(input)
 end)
 
 print("========================================")
-print("👑 FERZZ STORE UI LOADED")
+print("👑 FERZZ STORE X SKIPPY STORE UI LOADED")
 print("========================================")
 print("✅ Reference layout: 1:1 compact")
-print("✅ FERZZ STORE")
+print("✅ FERZZ STORE X SKIPPY STORE")
 print("✅ Farming ON/OFF")
 print("✅ Amount slider 1-45")
 print("✅ Mobile draggable")
