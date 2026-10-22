@@ -1,7 +1,7 @@
 -- ============================================================
 --  JOSTAR STORE - UI MODERN KECIL + SLIDE 1-45
 -- ============================================================
---  CHANGES: UG_SPEED=20, Buy Max=45, JOSTAR STORE
+--  CHANGES: UG_SPEED=25, Buy Max=50, JOSTAR STORE
 -- ============================================================
 
 -- ============================================================
@@ -395,7 +395,7 @@ local function StopXRay()
     for obj, trans in pairs(transparencyCache) do
         pcall(function() if obj and obj.Parent then obj.Transparency = trans end end)
     end
-    print("🔮 X-Ray: OFF")
+    print("🔮 X-Ray: ON")
 end
 
 local function RefreshCache()
@@ -415,7 +415,7 @@ local function SetupAutoRefresh()
 end
 
 -- ============================================================
--- 🎨 RGB NAME (FERZZ STORE) - AUTO ON
+-- 🎨 RGB NAME (JOSTAR STORE) - AUTO ON
 -- ============================================================
 local RGBEnabled = false
 local CurrentDisplayName = "JOSTAR STORE"
@@ -565,7 +565,7 @@ local function UpdateCashTracker()
 end
 
 -- ============================================================
--- 🔥 TELEPORT FUNCTIONS - UG_SPEED = 20 ✅
+-- 🔥 TELEPORT FUNCTIONS - UG_SPEED = 25 ✅
 -- ============================================================
 local tpActive = false
 local tpCancelled = false
@@ -612,7 +612,7 @@ local function tpToPos(cx, cy, cz)
         if deathConn then deathConn:Disconnect(); deathConn = nil end
     end)
     local UNDERGROUND_Y = -4.00
-    local UG_SPEED = 20              -- ✅ DIUBAH DARI 7 → 20
+    local UG_SPEED = 25              -- ✅ DIUBAH DARI 7 → 25
     local ground = Instance.new("Part")
     ground.Name = "GroundTemp"
     ground.Size = Vector3.new(99999, 1, 99999)
@@ -776,7 +776,7 @@ local function EnsureBuyAprt()
 end
 
 -- ============================================================
--- 💰 BUY SYSTEM — FIXED MAX 45 ✅
+-- 💰 BUY SYSTEM — FIXED MAX 50 ✅
 -- ============================================================
 local function GetIngredientCount()
     local water, sugar, gelatin = 0, 0, 0
@@ -800,10 +800,10 @@ local function BuyGelatin()
     pcall(function() RemoteEvent:FireServer(buffer.fromstring("\024\019\001")) end)
 end
 
--- ✅ FIXED BUY ALL — Anti Overbuy + Max 45
+-- ✅ FIXED BUY ALL — Anti Overbuy + Max 50
 local function BuyAll(amount)
     amount = amount or FarmSettings.Amount
-    -- ✅ Clamp agar tidak melebihi 45
+    -- ✅ Clamp agar tidak melebihi 50
     if amount > BUY_MAX then amount = BUY_MAX end
     if amount < BUY_MIN then amount = BUY_MIN end
 
@@ -1036,7 +1036,7 @@ end
 -- COOK MARSHMALLOW
 local function CookMarshmallow(amount, skipBuy)
     amount = amount or FarmSettings.Amount
-    if amount > BUY_MAX then amount = BUY_MAX end  -- ✅ Cap ke 45
+    if amount > BUY_MAX then amount = BUY_MAX end  -- ✅ Cap ke 50
     FarmState.BatchProgress = "0/" .. amount
     FarmState.CurrentBatch = 0
     
